@@ -1,13 +1,14 @@
-<ion-header no-shadow>
-  <ion-navbar>
-    <ion-buttons end *ngIf="showSkip">
-      <button ion-button (click)="startApp()" color="primary">Skip</button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
+<!--<ion-header no-shadow>-->
+  <!--<ion-navbar>-->
+    <!--<ion-buttons end *ngIf="showSkip">-->
+      <!--<button ion-button (click)="startApp()" color="primary">Skip</button>-->
+    <!--</ion-buttons>-->
+  <!--</ion-navbar>-->
+<!--</ion-header>-->
+
 
 <ion-content no-bounce>
-  <ion-slides [options]="{pager: true}" (ionWillChange)="onSlideChangeStart($event)">
+  <ion-slides (ionWillChange)="onSlideChangeStart($event)">
     <ion-slide *ngFor="let slide of slides">
       <img [src]="slide.image" class="slide-image" alt="slide.title"/>
       <h2 class="slide-title" [innerHTML]="slide.title"></h2>
@@ -18,8 +19,21 @@
       <h2 class="slide-title">Ready to Play?</h2>
       <button ion-button icon-right large clear (click)="startApp()">
         Continue
-        <ion-icon name="arrow-forward"></ion-icon>
+        <!--<ion-icon name="arrow-forward"></ion-icon>-->
       </button>
     </ion-slide>
   </ion-slides>
 </ion-content>
+
+<ion-footer>
+
+
+  <ion-row>
+    <ion-col center text-center>
+      <ion-buttons>
+        <button ion-button (click)="goLogin()" color="light">Login</button>
+        <button ion-button (click)="goSignUp()" color="light">Sign up</button>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+</ion-footer>

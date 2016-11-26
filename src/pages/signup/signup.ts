@@ -16,6 +16,10 @@ export class SignupPage {
 
   constructor(public navCtrl: NavController, public userData: UserData) {}
 
+  goTutorial() {
+    this.navCtrl.pop(SignupPage);
+  }
+
   onSignup(form) {
     this.submitted = true;
 

@@ -1,45 +1,115 @@
+
 <ion-header>
+	<ion-grid>
+		<ion-row>
+			<ion-col offset-25 width-50>
+				<ion-row>
+					<ion-col>
+						<img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 75px; float: right">
+					</ion-col>
+					<ion-col>
+						<h2 style="margin-bottom: 0px">Seconds</h2>
+						<span>Achieve your dreams</span>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 	<ion-navbar>
 		<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-		<ion-title>Login</ion-title>
+		  <ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title center text-center>Login</ion-title>
+		<ion-buttons end>
+			<button ion-button color="light">
+				Users
+				<ion-badge item-right>1000</ion-badge>
+			</button>
+
+		</ion-buttons>
 	</ion-navbar>
 </ion-header>
 
 <ion-content>
-	<div class="logo">
-		<img src="assets/img/appicon.svg" alt="Ionic logo">
-	</div>
+
 
 	<form #loginForm="ngForm" novalidate>
+		<br>
 		<ion-list no-lines>
-			<ion-item>
-				<ion-label stacked color="primary">Username</ion-label>
-				<ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
-					required>
-				</ion-input>
-			</ion-item>
-			<p [hidden]="username.valid || submitted == false" color="danger" padding-left>
-				Username is required
-			</p>
+			<ion-row>
+				<ion-col offset-25 width-50>
+					<ion-item>
+						<ion-label stacked color="primary">Email Address</ion-label>
+						<ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+								   required>
+						</ion-input>
+					</ion-item>
+					<p [hidden]="username.valid || submitted == false" color="danger" padding-left>
+						Email is required
+					</p>
+				</ion-col>
+			</ion-row>
 
-			<ion-item>
-				<ion-label stacked color="primary">Password</ion-label>
-				<ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
-				</ion-input>
-			</ion-item>
-			<p [hidden]="password.valid || submitted == false" color="danger" padding-left>
-				Password is required
-			</p>
+			<ion-row>
+				<ion-col offset-25 width-50>
+					<ion-item>
+						<ion-label stacked color="primary">Password</ion-label>
+						<ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
+						</ion-input>
+					</ion-item>
+					<p [hidden]="password.valid || submitted == false" color="danger" padding-left>
+						Password is required
+					</p>
+				</ion-col>
+			</ion-row>
+
+
+
 		</ion-list>
 
-		<ion-row responsive-sm>
-			<ion-col>
-				<button ion-button (click)="onLogin(loginForm)" type="submit" block>Login</button>
+		<ion-row>
+			<ion-col offset-25 width-25>
+				<button ion-button type="submit" block color="light">Done</button>
+			</ion-col>
+			<span style="padding: 20px 10px; text-align: center">
+				Or
+			</span>
+			<ion-col width-25>
+				<button ion-button (click)="goTutorial()" color="dark" block clear>Back</button>
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col center text-center>
+				<a>Forgot Your Password ?</a>
+			</ion-col>
+		</ion-row>
+
+		<br>
+		<ion-row>
+			<ion-col offset-20 width-25>
+				<hr>
 			</ion-col>
 			<ion-col>
-				<button ion-button (click)="onSignup()" color="light" block>Signup</button>
+				Or use social engines
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col offset-33 width-33>
+				<button ion-button block color="primary">Linkedin</button>
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col offset-33 width-33>
+				<button ion-button block color="primary">Google</button>
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col offset-33 width-33>
+				<button ion-button block color="primary">Facebook</button>
 			</ion-col>
 		</ion-row>
 	</form>

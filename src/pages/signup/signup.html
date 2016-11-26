@@ -1,42 +1,124 @@
+
 <ion-header>
+	<ion-grid>
+		<ion-row>
+			<ion-col offset-25 width-50>
+				<ion-row>
+					<ion-col>
+						<img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 75px; float: right">
+					</ion-col>
+					<ion-col>
+						<h2 style="margin-bottom: 0px">Seconds</h2>
+						<span style="display: inline-block; width: 100%">Achieve your dreams</span>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 	<ion-navbar>
 		<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-		<ion-title>Signup</ion-title>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title center text-center>Sign Up</ion-title>
+		<ion-buttons end>
+			<button ion-button color="light">
+				Users
+				<ion-badge item-right>1000</ion-badge>
+			</button>
+
+		</ion-buttons>
 	</ion-navbar>
 </ion-header>
 
-<ion-content class="login-page">
+<ion-content>
 
-	<div class="logo">
-		<img src="assets/img/appicon.svg" alt="Ionic Logo">
-	</div>
 
 	<form #signupForm="ngForm" novalidate>
+		<br>
 		<ion-list no-lines>
-			<ion-item>
-				<ion-label stacked color="primary">Username</ion-label>
-				<ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" required>
-				</ion-input>
-			</ion-item>
-			<p [hidden]="username.valid || submitted == false" color="danger" padding-left>
-				Username is required
-			</p>
+			<ion-row>
+				<ion-col offset-25 width-50>
+					<ion-item>
+						<ion-label stacked color="primary">Name</ion-label>
+						<ion-input [(ngModel)]="signup.name" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off"
+								   required>
+						</ion-input>
+					</ion-item>
+					<p [hidden]="name.valid || submitted == false" color="danger" padding-left>
+						Name is required
+					</p>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col offset-25 width-50>
+					<ion-item>
+						<ion-label stacked color="primary">Email Address</ion-label>
+						<ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+								   required>
+						</ion-input>
+					</ion-item>
+					<p [hidden]="username.valid || submitted == false" color="danger" padding-left>
+						Email is required
+					</p>
+				</ion-col>
+			</ion-row>
 
-			<ion-item>
-				<ion-label stacked color="primary">Password</ion-label>
-				<ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
-				</ion-input>
-			</ion-item>
-			<p [hidden]="password.valid || submitted == false" color="danger" padding-left>
-				Password is required
-			</p>
+			<ion-row>
+				<ion-col offset-25 width-50>
+					<ion-item>
+						<ion-label stacked color="primary">Password</ion-label>
+						<ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
+						</ion-input>
+					</ion-item>
+					<p [hidden]="password.valid || submitted == false" color="danger" padding-left>
+						Password is required
+					</p>
+				</ion-col>
+			</ion-row>
+
+
+
 		</ion-list>
 
-		<div padding>
-			<button ion-button (click)="onSignup(signupForm)" type="submit" block>Create</button>
-		</div>
+		<ion-row>
+			<ion-col offset-25 width-25>
+				<button ion-button type="submit" block color="light">Done</button>
+			</ion-col>
+			<span style="padding: 20px 10px; text-align: center">
+				Or
+			</span>
+			<ion-col width-25>
+				<button ion-button (click)="goTutorial()" color="dark" block clear>Back</button>
+			</ion-col>
+		</ion-row>
+
+		<br>
+		<ion-row>
+			<ion-col offset-20 width-25>
+				<hr>
+			</ion-col>
+			<ion-col>
+				Or use social engines
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col offset-33 width-33>
+				<button ion-button block color="primary">Linkedin</button>
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col offset-33 width-33>
+				<button ion-button block color="primary">Google</button>
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col offset-33 width-33>
+				<button ion-button block color="primary">Facebook</button>
+			</ion-col>
+		</ion-row>
 	</form>
 
 </ion-content>

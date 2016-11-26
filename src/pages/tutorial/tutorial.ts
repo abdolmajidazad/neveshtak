@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { MenuController, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-import { TabsPage } from '../tabs/tabs';
+import { SignupPage } from '../signup/signup';
+import { LoginPage } from '../login/login';
 
 
 export interface Slide {
@@ -40,9 +40,14 @@ export class TutorialPage {
     ];
   }
 
-  startApp() {
-    this.navCtrl.push(TabsPage);
-    this.storage.set('hasSeenTutorial', 'true');
+  goLogin() {
+    this.navCtrl.push(LoginPage);
+    // this.storage.set('hasSeenTutorial', 'true');
+  }
+
+  goSignUp() {
+    this.navCtrl.push(SignupPage);
+    // this.storage.set('hasSeenTutorial', 'true');
   }
 
   onSlideChangeStart(slider) {

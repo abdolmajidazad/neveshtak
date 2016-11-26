@@ -69,10 +69,11 @@ export class ConferenceApp {
     this.userData.checkHasSeenTutorial().then((hasSeenTutorial) => {
       if (hasSeenTutorial === null) {
         // User has not seen tutorial
-        this.rootPage = TutorialPage;
+        // this.rootPage = TutorialPage;
       } else {
         // User has seen tutorial
-        this.rootPage = TabsPage;
+        // this.rootPage = TabsPage;
+        this.rootPage = TutorialPage;
       }
     });
 
