@@ -2,16 +2,12 @@
 <ion-header>
 	<ion-grid>
 		<ion-row>
-			<ion-col offset-25 width-50>
-				<ion-row>
-					<ion-col>
-						<img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 75px; float: right">
-					</ion-col>
-					<ion-col>
-						<h2 style="margin-bottom: 0px">Seconds</h2>
-						<span style="display: inline-block; width: 100%">Achieve your dreams</span>
-					</ion-col>
-				</ion-row>
+			<ion-col >
+				<img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 75px; float: right">
+			</ion-col>
+			<ion-col>
+				<h2 style="margin-bottom: 0px">Seconds</h2>
+				<span>Achieve your dreams</span>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
@@ -82,7 +78,7 @@
 
 		<ion-row>
 			<ion-col offset-25 width-25>
-				<button ion-button type="submit" block color="light">Done</button>
+				<button ion-button type="submit" (click)="onSignup()" block color="light">Done</button>
 			</ion-col>
 			<span style="padding: 20px 10px; text-align: center">
 				Or

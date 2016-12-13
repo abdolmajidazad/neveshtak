@@ -1,18 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { AlertController, App, ItemSliding, List, ModalController, NavController } from 'ionic-angular';
+import { AlertController, App,  List, ModalController, NavController } from 'ionic-angular';
 
 /*
   To learn how to use third party libs in an
   Ionic app check out our docs here: http://ionicframework.com/docs/v2/resources/third-party-libs/
 */
-import moment from 'moment';
+//import moment from 'moment';
 
 import { ConferenceData } from '../../providers/conference-data';
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
-import { SessionDetailPage } from '../session-detail/session-detail';
+//import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+//import { SessionDetailPage } from '../session-detail/session-detail';
 import { UserData } from '../../providers/user-data';
-
+//import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-schedule',
@@ -32,6 +32,7 @@ export class SchedulePage {
   shownSessions: any = [];
   groups = [];
   confDate: string;
+  pet: string = 'puppies';
 
   constructor(
     public alertCtrl: AlertController,
@@ -40,105 +41,121 @@ export class SchedulePage {
     public navCtrl: NavController,
     public confData: ConferenceData,
     public user: UserData
+
   ) {
 
   }
-
   ionViewDidLoad() {
-    this.app.setTitle('Schedule');
-    this.updateSchedule();
+    //this.app.setTitle('Schedule');
+    this.updateSchedule('Timeline');
   }
 
-  updateSchedule() {
+
+  updateSchedule(data) {
+    console.log(data)
+    this.segment = data
+    this.shownSessions = data;
+
     // Close any open sliding items when the schedule updates
-    this.scheduleList && this.scheduleList.closeSlidingItems();
-
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe(data => {
-      let timestamp = data.date;
-
-      /*
-        To learn how to use third party libs in an
-        Ionic app check out our docs here: http://ionicframework.com/docs/v2/resources/third-party-libs/
-      */
-      this.confDate = moment(timestamp).format('MM/DD/YYYY');
-      this.shownSessions = data.shownSessions;
-      this.groups = data.groups;
-    });
+    //this.scheduleList && this.scheduleList.closeSlidingItems();
+    //
+    //this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe(data => {
+    //  let timestamp = data.date;
+    //
+    //  /*
+    //    To learn how to use third party libs in an
+    //    Ionic app check out our docs here: http://ionicframework.com/docs/v2/resources/third-party-libs/
+    //  */
+    //  this.confDate = moment(timestamp).format('MM/DD/YYYY');
+    //  this.shownSessions = data.shownSessions;
+    //  this.groups = data.groups;
+    //});
   }
+  //
+  //presentFilter() {
+  //  let modal = this.modalCtrl.create(ScheduleFilterPage, this.excludeTracks);
+  //  modal.present();
+  //
+  //  modal.onWillDismiss((data: any[]) => {
+  //    if (data) {
+  //      this.excludeTracks = data;
+  //      this.updateSchedule();
+  //    }
+  //  });
+  //
+  //}
 
-  presentFilter() {
-    let modal = this.modalCtrl.create(ScheduleFilterPage, this.excludeTracks);
-    modal.present();
+  //goToSessionDetail(sessionData) {
+  //  // go to the session detail page
+  //  // and pass in the session data
+  //  this.navCtrl.push(SessionDetailPage, sessionData);
+  //}
+  //
+  //addFavorite(slidingItem: ItemSliding, sessionData) {
+  //
+  //  if (this.user.hasFavorite(sessionData.name)) {
+  //    // woops, they already favorited it! What shall we do!?
+  //    // prompt them to remove it
+  //    this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
+  //  } else {
+  //    // remember this session as a user favorite
+  //    this.user.addFavorite(sessionData.name);
+  //
+  //    // create an alert instance
+  //    let alert = this.alertCtrl.create({
+  //      title: 'Favorite Added',
+  //      buttons: [{
+  //        text: 'OK',
+  //        handler: () => {
+  //          // close the sliding item
+  //          slidingItem.close();
+  //        }
+  //      }]
+  //    });
+  //    // now present the alert on top of all other content
+  //    alert.present();
+  //  }
+  //
+  //}
+  //
+  //removeFavorite(slidingItem: ItemSliding, sessionData, title) {
+  //  let alert = this.alertCtrl.create({
+  //    title: title,
+  //    message: 'Would you like to remove this session from your favorites?',
+  //    buttons: [
+  //      {
+  //        text: 'Cancel',
+  //        handler: () => {
+  //          // they clicked the cancel button, do not remove the session
+  //          // close the sliding item and hide the option buttons
+  //          slidingItem.close();
+  //        }
+  //      },
+  //      {
+  //        text: 'Remove',
+  //        handler: () => {
+  //          // they want to remove this session from their favorites
+  //          this.user.removeFavorite(sessionData.name);
+  //          this.updateSchedule();
+  //
+  //          // close the sliding item and hide the option buttons
+  //          slidingItem.close();
+  //        }
+  //      }
+  //    ]
+  //  });
+  //  // now present the alert on top of all other content
+  //  alert.present();
+  //}
 
-    modal.onWillDismiss((data: any[]) => {
-      if (data) {
-        this.excludeTracks = data;
-        this.updateSchedule();
-      }
-    });
 
-  }
+  //onHome(form) {
+  //  this.navCtrl.pop(ProfilePage);
+    //this.submitted = true;
 
-  goToSessionDetail(sessionData) {
-    // go to the session detail page
-    // and pass in the session data
-    this.navCtrl.push(SessionDetailPage, sessionData);
-  }
-
-  addFavorite(slidingItem: ItemSliding, sessionData) {
-
-    if (this.user.hasFavorite(sessionData.name)) {
-      // woops, they already favorited it! What shall we do!?
-      // prompt them to remove it
-      this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
-    } else {
-      // remember this session as a user favorite
-      this.user.addFavorite(sessionData.name);
-
-      // create an alert instance
-      let alert = this.alertCtrl.create({
-        title: 'Favorite Added',
-        buttons: [{
-          text: 'OK',
-          handler: () => {
-            // close the sliding item
-            slidingItem.close();
-          }
-        }]
-      });
-      // now present the alert on top of all other content
-      alert.present();
-    }
-
-  }
-
-  removeFavorite(slidingItem: ItemSliding, sessionData, title) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      message: 'Would you like to remove this session from your favorites?',
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: () => {
-            // they clicked the cancel button, do not remove the session
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        },
-        {
-          text: 'Remove',
-          handler: () => {
-            // they want to remove this session from their favorites
-            this.user.removeFavorite(sessionData.name);
-            this.updateSchedule();
-
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        }
-      ]
-    });
-    // now present the alert on top of all other content
-    alert.present();
-  }
+    // if (form.valid) {
+    //   this.userData.signup(this.signup.username);
+    //   this.navCtrl.push(TabsPage);
+    // }
+  //}
 }

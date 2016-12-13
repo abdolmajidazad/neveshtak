@@ -1,74 +1,208 @@
-<ion-header>
-  <ion-navbar no-border-bottom>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+<ion-header  >
+  <!--<ion-navbar >-->
+    <!--<button ion-button menuToggle>-->
+      <!--<ion-icon name="menu"></ion-icon>-->
+    <!--</button>-->
 
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
-      <ion-segment-button value="all">
-        All
-      </ion-segment-button>
-      <ion-segment-button value="favorites">
-        Favorites
-      </ion-segment-button>
-    </ion-segment>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="presentFilter()">
-        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+  <ion-grid color="light">
+    <ion-row color="light">
+      <ion-col width-33>
+        <ion-navbar >
 
-  <ion-toolbar no-border-top>
-    <ion-searchbar color="primary"
-                   [(ngModel)]="queryText"
-                   (ionInput)="updateSchedule()"
-                   placeholder="Search">
-    </ion-searchbar>
-  </ion-toolbar>
+        </ion-navbar>
+      </ion-col >
+      <ion-col center text-center width-20>
+        <img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px">
+      </ion-col>
+      <ion-col width-33>
+        <h5 style="margin-bottom: 0px">neveshtak</h5>
+
+      </ion-col>
+      <ion-col>
+        <ion-icon name="ios-settings" style="float: right;padding: 20px;"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+    <!--<ion-buttons end>-->
+      <!--<button ion-button icon-only (click)="presentFilter()">-->
+        <!--<ion-icon ios="ios-options-outline" md="md-options"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
+  <!--</ion-navbar>-->
+
+  <!--<ion-toolbar no-border-top>-->
+    <!--&lt;!&ndash;<ion-searchbar color="primary"&ndash;&gt;-->
+                   <!--&lt;!&ndash;[(ngModel)]="queryText"&ndash;&gt;-->
+                   <!--&lt;!&ndash;(ionInput)="updateSchedule()"&ndash;&gt;-->
+                   <!--&lt;!&ndash;placeholder="Search">&ndash;&gt;-->
+    <!--&lt;!&ndash;</ion-searchbar>&ndash;&gt;-->
+  <!--</ion-toolbar>-->
 </ion-header>
 
 <ion-content>
-  <ion-list #scheduleList [hidden]="shownSessions === 0">
+  <ion-segment color="dark" [(ngModel)]="segment" (ionChange)="updateSchedule(segment)">
+    <ion-segment-button style="color: #000" value="Timeline">
+      Timeline
+    </ion-segment-button>
+    <ion-segment-button style="color: #000" value="Explorer">
+      Explorer
+    </ion-segment-button>
+    <ion-segment-button style="color: #000" value="Upload">
+      Upload
+    </ion-segment-button>
+    <ion-segment-button style="color: #000" value="Profile">
+      Profile
+    </ion-segment-button>
+  </ion-segment>
+  <ion-list  *ngIf="shownSessions === 'Timeline'">
 
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+    <ion-toolbar>
+      <!--<div padding>-->
+        <ion-segment color="dark" [(ngModel)]="pet">
+          <ion-segment-button color="dark" value="puppies">
+            Users
+          </ion-segment-button>
+          <ion-segment-button style="color: #000;" value="kittens">
+            Categories
+          </ion-segment-button>
 
-      <ion-item-divider sticky>
-        <ion-label>
-          {{group.time}}
-        </ion-label>
-      </ion-item-divider>
+          <ion-segment-button style="color: #000;" value="puppies1">
+            Tags
+          </ion-segment-button>
+        </ion-segment>
+      <!--</div>-->
+    </ion-toolbar>
 
-      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
+    <div [ngSwitch]="pet">
+      <ion-list *ngSwitchCase="'puppies1'">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="img/speakers/iguana.jpg">
+          </ion-thumbnail>
+          <h2>majid azad</h2>
+        </ion-item>
+        ...
+      </ion-list>
+      <ion-list *ngSwitchCase="'puppies'">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="assets/img/speakers/majid.jpg">
+          </ion-thumbnail>
+          <h2>Martin Azad</h2>
+        </ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col center text-center>
+              <img src="assets/img/speakers/iguana.jpg" alt="Ionic logo" center >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col width-20 center text-center >
 
-        <button ion-item (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
-          <p>
-            {{session.timeStart}} &mdash;
-            {{session.timeEnd}}:
-            {{session.location}}
-          </p>
-        </button>
+                <ion-icon name="ios-heart"></ion-icon>
+                <br>110
+              </ion-col>
+            <ion-col width-20 center text-center>
 
-        <ion-item-options>
-          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
-            Favorite
-          </button>
-          <button ion-button color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')" *ngIf="segment === 'favorites'">
-            Remove
-          </button>
-        </ion-item-options>
+              <ion-icon name="ios-thumbs-up"></ion-icon>
+              <br>20
+            </ion-col>
+            <ion-col width-20 center text-center>
 
-      </ion-item-sliding>
+              <ion-icon name="ios-thumbs-down"></ion-icon>
+              <br>2
+            </ion-col>
+            <ion-col width-20 center text-center>
 
-    </ion-item-group>
+              <ion-icon name="ios-chatbubbles"></ion-icon>
+              <br>2
+            </ion-col>
+            <ion-col width-20 center text-center>
+
+              <ion-icon name="ios-paper-plane"></ion-icon>
+              <br>0
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
+      </ion-list>
+      <ion-list *ngSwitchCase="'kittens'">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="assets/img/speakers/cheetah.jpg">
+          </ion-thumbnail>
+          <h2>Category 1</h2>
+          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 3 Hours ago by apz</h6>
+        </ion-item>
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="assets/img/speakers/elephant.jpg">
+          </ion-thumbnail>
+          <h2>Category 2</h2>
+          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 10 Hours ago by mgs</h6>
+        </ion-item>
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="assets/img/speakers/giraffe.jpg">
+          </ion-thumbnail>
+          <h2>Category 3</h2>
+          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 11 Hours ago by srh</h6>
+        </ion-item>
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="assets/img/speakers/puppy.jpg">
+          </ion-thumbnail>
+          <h2>Category 4</h2>
+          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated Yesterday by ama</h6>
+        </ion-item>
+      </ion-list>
+      <!--<ion-list *ngSwitchCase="'kittens'">-->
+        <!--<ion-item>-->
+          <!--<ion-thumbnail item-left>-->
+            <!--<img src="assets/img/speakers/andrew.jpg">-->
+          <!--</ion-thumbnail>-->
+          <!--<h2>Andrew pourzahmatkesh</h2>-->
+        <!--</ion-item>-->
+        <!--<ion-item>-->
+            <!--<ion-thumbnail item-left>-->
+              <!--<img src="assets/img/speakers/steve.jpg">-->
+            <!--</ion-thumbnail>-->
+            <!--<h2>Steve Golabshekar</h2>-->
+        <!--</ion-item>-->
+        <!--<ion-item>-->
+          <!--<ion-thumbnail item-left>-->
+            <!--<img src="assets/img/speakers/ray.jpg">-->
+          <!--</ion-thumbnail>-->
+          <!--<h2>Ray Hossayni</h2>-->
+        <!--</ion-item>-->
+        <!--<ion-item>-->
+          <!--<ion-thumbnail item-left>-->
+            <!--<img src="assets/img/speakers/majid.jpg">-->
+          <!--</ion-thumbnail>-->
+          <!--<h2>Martin Azad</h2>-->
+        <!--</ion-item>-->
+      <!--</ion-list>-->
+
+    </div>
 
   </ion-list>
 
-  <ion-list-header [hidden]="shownSessions > 0">
-      No Sessions Found
-  </ion-list-header>
+  <ion-list *ngIf="shownSessions === 'Explorer'">
+    Explorer
+  </ion-list>
+
+  <ion-list *ngIf="shownSessions === 'Upload'">
+    Upload
+  </ion-list>
+
+  <ion-list *ngIf="shownSessions === 'Profile'">
+    Profile
+  </ion-list>
 
 
 </ion-content>
