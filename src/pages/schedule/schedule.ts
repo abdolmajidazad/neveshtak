@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { AlertController, App,  List, ModalController, NavController } from 'ionic-angular';
-
+import { PopoverController } from 'ionic-angular';
 /*
   To learn how to use third party libs in an
   Ionic app check out our docs here: http://ionicframework.com/docs/v2/resources/third-party-libs/
@@ -12,6 +12,7 @@ import { ConferenceData } from '../../providers/conference-data';
 //import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 //import { SessionDetailPage } from '../session-detail/session-detail';
 import { UserData } from '../../providers/user-data';
+import { PopoverPage } from '../about-popover/about-popover';
 //import { ProfilePage } from '../profile/profile';
 
 @Component({
@@ -33,6 +34,10 @@ export class SchedulePage {
   groups = [];
   confDate: string;
   pet: string = 'puppies';
+  subCat = 'hide';
+  selectedCat = '';
+  json = {};
+  titleCat = '';
 
   constructor(
     public alertCtrl: AlertController,
@@ -40,7 +45,8 @@ export class SchedulePage {
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     public confData: ConferenceData,
-    public user: UserData
+    public user: UserData,
+    public popoverCtrl: PopoverController
 
   ) {
 
@@ -158,4 +164,80 @@ export class SchedulePage {
     //   this.navCtrl.push(TabsPage);
     // }
   //}
+
+  presentPopover(event) {
+    let popover = this.popoverCtrl.create(PopoverPage);
+    popover.present({ ev: event });
+  }
+
+  subCategory(status, data, title){
+    console.log("mmamamamamamma")
+    this.subCat = status;
+    this.titleCat = title;
+
+    this.json = {
+      cat1 : [
+        {
+          'title' : 'Category 1.1',
+          'image' : 'assets/img/speakers/eagle.jpg',
+          'description' : "Upload 4 hour age by apz",
+          'count' : 54
+        },
+        {
+          'title' : 'Category 1.2',
+          'image' : 'assets/img/speakers/bear.jpg',
+          'description' : "Upload 6 hour age by apz",
+          'count' : 634
+        }
+      ],
+      cat2 : [
+        {
+          'title' : 'Category 2.1',
+          'image' : 'assets/img/speakers/cheetah.jpg',
+          'description' : "Upload 5 hour age by ama",
+          'count' : 1003
+        },
+        {
+          'title' : 'Category 2.2',
+          'image' : 'assets/img/speakers/puppy.jpg',
+          'description' : "Upload 7 hour age by ama",
+          'count' : 123
+        },
+        {
+          'title' : 'Category 2.2',
+          'image' : 'assets/img/speakers/rabbit.jpg',
+          'description' : "Upload yesterday by apz",
+          'count' : 5323
+        }
+      ],
+      cat3 : [
+        {
+          'title' : 'Category 3.1',
+          'image' : 'assets/img/speakers/turtle.jpg',
+          'description' : "Upload 4 hour age by srh",
+          'count' : 45
+        },
+        {
+          'title' : 'Category 3.2',
+          'image' : 'assets/img/speakers/iguana.jpg',
+          'description' : "Upload 9 hour age by srh",
+          'count' : 5323
+        }
+      ],
+      cat4 : [
+        {
+          'title' : 'Category 4.1',
+          'image' : 'assets/img/speakers/eagle.jpg',
+          'description' : "Upload 5 hour age by mgs"
+        },
+        {
+          'title' : 'Category 4.2',
+          'image' : 'assets/img/speakers/cheetah.jpg',
+          'description' : "Upload yesterday by mgs",
+          'count' :32
+        }
+      ]
+    }
+    this.selectedCat = this.json[data];
+  }
 }
