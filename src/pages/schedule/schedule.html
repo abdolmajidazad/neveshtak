@@ -1,31 +1,54 @@
-<ion-header  >
+<ion-header color="light" >
   <!--<ion-navbar >-->
     <!--<button ion-button menuToggle>-->
       <!--<ion-icon name="menu"></ion-icon>-->
     <!--</button>-->
 
 
-  <ion-grid color="light">
-    <ion-row color="light">
-      <ion-col width-33>
-        <ion-navbar >
+  <!--<ion-grid >-->
+    <!--<ion-row>-->
+      <!--<ion-col width-33>-->
+        <!--<ion-navbar >-->
 
-        </ion-navbar>
-      </ion-col >
-      <ion-col center text-center width-20>
-        <img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px">
-      </ion-col>
-      <ion-col width-33>
-        <h5 style="margin-bottom: 0px">neveshtak</h5>
+        <!--</ion-navbar>-->
+      <!--</ion-col >-->
+      <!--<ion-col center text-center width-20 >-->
+        <!--<img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px">-->
+      <!--</ion-col>-->
+      <!--<ion-col width-33 >-->
+        <!--<h5 style="margin-bottom: 0px" >neveshtak</h5>-->
 
-      </ion-col>
-      <ion-col>
-        <ion-icon name="ios-settings" style="float: right;padding: 20px;"></ion-icon>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <!--</ion-col>-->
+      <!--<ion-col>-->
+        <!--&lt;!&ndash;<ion-icon name="ios-settings" style="float: right;padding: 20px;"></ion-icon>&ndash;&gt;-->
+        <!--<ion-buttons end>-->
+          <!--<button color="light" ion-button icon-only (click)="presentPopover($event)">-->
+            <!--<ion-icon name="ios-settings"></ion-icon>-->
+          <!--</button>-->
+        <!--</ion-buttons>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-grid>-->
+
+  <ion-navbar>
+    <!--<button ion-button menuToggle>-->
+      <!--<ion-icon name="menu"></ion-icon>-->
+    <!--</button>-->
+    <ion-title>
+      <ion-row>
+        <ion-col width-50 right text-right><img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px"></ion-col>
+        <ion-col width-50 style="margin-top: 10px">neveshtak</ion-col>
+      </ion-row>
 
 
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="ios-settings"></ion-icon>
+      </button>
+
+    </ion-buttons>
+  </ion-navbar>
 
     <!--<ion-buttons end>-->
       <!--<button ion-button icon-only (click)="presentFilter()">-->
@@ -92,7 +115,9 @@
           <ion-thumbnail item-left>
             <img src="assets/img/speakers/majid.jpg">
           </ion-thumbnail>
-          <h2>Martin Azad</h2>
+          <ion-col width-100><h3 style="padding: 0px"><b>cat1 > cat2 > cat3 > ...</b></h3></ion-col>
+          <ion-col width-100><h4 style="padding: 0px"><b>Username</b></h4></ion-col>
+          <ion-col width-100><h6 style="padding: 0px"><span style="color: #ddd">1 hour ago</span></h6></ion-col>
         </ion-item>
         <ion-grid>
           <ion-row>
@@ -131,43 +156,90 @@
         </ion-grid>
 
       </ion-list>
-      <ion-list *ngSwitchCase="'kittens'">
-        <ion-item>
+      <ion-list *ngSwitchCase="'kittens'" >
+        <ion-grid *ngIf="subCat === 'hide'">
+          <ion-item >
+            <ion-thumbnail item-left>
+              <img src="assets/img/speakers/cheetah.jpg">
+            </ion-thumbnail>
+            <ion-row>
+              <ion-col width-80 (click)="subCategory('show', 'cat1','Category 1')">
+                <h2>Category 1</h2>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 3 Hours ago by apz</h6>
+              </ion-col>
+              <ion-col width-20>
+                <ion-badge color="dark">24</ion-badge>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/speakers/elephant.jpg">
+            </ion-thumbnail>
+            <ion-row>
+              <ion-col width-80 (click)="subCategory('show', 'cat2','Category 2')">
+                <h2>Category 2</h2>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 10 Hours ago by mgs</h6>
+              </ion-col>
+              <ion-col width-20>
+                <ion-badge color="dark">56</ion-badge>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/speakers/giraffe.jpg">
+            </ion-thumbnail>
+            <ion-row>
+              <ion-col width-80 (click)="subCategory('show', 'cat3','Category 3')">
+                <h2>Category 3</h2>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 11 Hours ago by srh</h6>
+              </ion-col>
+              <ion-col width-20>
+                <ion-badge color="dark">18</ion-badge>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/speakers/puppy.jpg">
+            </ion-thumbnail>
+            <ion-row>
+              <ion-col width-80 (click)="subCategory('show', 'cat4','Category 4')">
+                <h2>Category 4</h2>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated Yesterday by ama</h6>
+              </ion-col>
+              <ion-col width-20>
+                <ion-badge color="dark">67</ion-badge>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-grid>
+    </ion-list>
+      <ion-list *ngIf="subCat === 'show'">
+        <ion-grid>
+          <ion-row style="background-color: #ddd">
+            <ion-col  (click)="subCategory('hide', '')">
+              <ion-icon name="ios-arrow-back"></ion-icon><span style="margin-left: 10px">{{titleCat}}</span>
+            </ion-col>
+
+          </ion-row>
+
+        </ion-grid>
+        <ion-item *ngFor='let value of selectedCat'>
           <ion-thumbnail item-left>
-            <img src="assets/img/speakers/cheetah.jpg">
+            <img src="{{value['image']}}">
           </ion-thumbnail>
-          <h2>Category 1</h2>
-          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 3 Hours ago by apz</h6>
+          <ion-row>
+            <ion-col width-80 >
+              <h2>{{value.title}}</h2>
+              <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">{{value['description']}}</h6>
+            </ion-col>
+            <ion-col width-20>
+              <ion-badge color="dark">{{value['count']}}</ion-badge>
+            </ion-col>
+          </ion-row>
         </ion-item>
-        <ion-item>
-          <ion-thumbnail item-left>
-            <img src="assets/img/speakers/elephant.jpg">
-          </ion-thumbnail>
-          <h2>Category 2</h2>
-          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 10 Hours ago by mgs</h6>
-        </ion-item>
-        <ion-item>
-          <ion-thumbnail item-left>
-            <img src="assets/img/speakers/giraffe.jpg">
-          </ion-thumbnail>
-          <h2>Category 3</h2>
-          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 11 Hours ago by srh</h6>
-        </ion-item>
-        <ion-item>
-          <ion-thumbnail item-left>
-            <img src="assets/img/speakers/puppy.jpg">
-          </ion-thumbnail>
-          <h2>Category 4</h2>
-          <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated Yesterday by ama</h6>
-        </ion-item>
-      </ion-list>
-      <!--<ion-list *ngSwitchCase="'kittens'">-->
-        <!--<ion-item>-->
-          <!--<ion-thumbnail item-left>-->
-            <!--<img src="assets/img/speakers/andrew.jpg">-->
-          <!--</ion-thumbnail>-->
-          <!--<h2>Andrew pourzahmatkesh</h2>-->
-        <!--</ion-item>-->
         <!--<ion-item>-->
             <!--<ion-thumbnail item-left>-->
               <!--<img src="assets/img/speakers/steve.jpg">-->
@@ -186,7 +258,7 @@
           <!--</ion-thumbnail>-->
           <!--<h2>Martin Azad</h2>-->
         <!--</ion-item>-->
-      <!--</ion-list>-->
+      </ion-list>
 
     </div>
 

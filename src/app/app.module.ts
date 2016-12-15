@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 import { ConferenceApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { PopoverPage } from '../pages/about-popover/about-popover';
+import { PopoverPage } from '../pages/schedule-popover/schedule-popover';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
