@@ -5,32 +5,50 @@
     <!--</button>-->
 
 
-  <ion-grid >
-    <ion-row>
-      <ion-col width-33>
-        <ion-navbar >
+  <!--<ion-grid >-->
+    <!--<ion-row>-->
+      <!--<ion-col width-33>-->
+        <!--<ion-navbar >-->
 
-        </ion-navbar>
-      </ion-col >
-      <ion-col center text-center width-20 >
-        <img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px">
-      </ion-col>
-      <ion-col width-33 >
-        <h5 style="margin-bottom: 0px" >neveshtak</h5>
+        <!--</ion-navbar>-->
+      <!--</ion-col >-->
+      <!--<ion-col center text-center width-20 >-->
+        <!--<img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px">-->
+      <!--</ion-col>-->
+      <!--<ion-col width-33 >-->
+        <!--<h5 style="margin-bottom: 0px" >neveshtak</h5>-->
 
-      </ion-col>
-      <ion-col>
-        <!--<ion-icon name="ios-settings" style="float: right;padding: 20px;"></ion-icon>-->
-        <ion-buttons end>
-          <button color="light" ion-button icon-only (click)="presentPopover($event)">
-            <ion-icon name="ios-settings"></ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <!--</ion-col>-->
+      <!--<ion-col>-->
+        <!--&lt;!&ndash;<ion-icon name="ios-settings" style="float: right;padding: 20px;"></ion-icon>&ndash;&gt;-->
+        <!--<ion-buttons end>-->
+          <!--<button color="light" ion-button icon-only (click)="presentPopover($event)">-->
+            <!--<ion-icon name="ios-settings"></ion-icon>-->
+          <!--</button>-->
+        <!--</ion-buttons>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-grid>-->
+
+  <ion-navbar>
+    <!--<button ion-button menuToggle>-->
+      <!--<ion-icon name="menu"></ion-icon>-->
+    <!--</button>-->
+    <ion-title>
+      <ion-row>
+        <ion-col width-50 right text-right><img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px"></ion-col>
+        <ion-col width-50 style="margin-top: 10px">neveshtak</ion-col>
+      </ion-row>
 
 
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="ios-settings"></ion-icon>
+      </button>
+
+    </ion-buttons>
+  </ion-navbar>
 
     <!--<ion-buttons end>-->
       <!--<button ion-button icon-only (click)="presentFilter()">-->
@@ -201,11 +219,10 @@
       <ion-list *ngIf="subCat === 'show'">
         <ion-grid>
           <ion-row style="background-color: #ddd">
-            <ion-col width-33 (click)="subCategory('hide', '')">
-              <ion-icon name="ios-arrow-back"></ion-icon>
+            <ion-col  (click)="subCategory('hide', '')">
+              <ion-icon name="ios-arrow-back"></ion-icon><span style="margin-left: 10px">{{titleCat}}</span>
             </ion-col>
-            <ion-col width-33 center text-center>{{titleCat}}</ion-col>
-            <ion-col width-33></ion-col>
+
           </ion-row>
 
         </ion-grid>

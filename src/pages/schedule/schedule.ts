@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-
-import { AlertController, App,  List, ModalController, NavController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
+import { AlertController, App,  List, ModalController, NavController } from 'ionic-angular';
+
+
 /*
   To learn how to use third party libs in an
   Ionic app check out our docs here: http://ionicframework.com/docs/v2/resources/third-party-libs/
@@ -12,7 +13,7 @@ import { ConferenceData } from '../../providers/conference-data';
 //import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 //import { SessionDetailPage } from '../session-detail/session-detail';
 import { UserData } from '../../providers/user-data';
-import { PopoverPage } from '../about-popover/about-popover';
+import { PopoverPage } from '../schedule-popover/schedule-popover';
 //import { ProfilePage } from '../profile/profile';
 
 @Component({
