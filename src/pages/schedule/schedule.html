@@ -1,42 +1,10 @@
-<ion-header color="light" >
-  <!--<ion-navbar >-->
-    <!--<button ion-button menuToggle>-->
-      <!--<ion-icon name="menu"></ion-icon>-->
-    <!--</button>-->
-
-
-  <!--<ion-grid >-->
-    <!--<ion-row>-->
-      <!--<ion-col width-33>-->
-        <!--<ion-navbar >-->
-
-        <!--</ion-navbar>-->
-      <!--</ion-col >-->
-      <!--<ion-col center text-center width-20 >-->
-        <!--<img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px">-->
-      <!--</ion-col>-->
-      <!--<ion-col width-33 >-->
-        <!--<h5 style="margin-bottom: 0px" >neveshtak</h5>-->
-
-      <!--</ion-col>-->
-      <!--<ion-col>-->
-        <!--&lt;!&ndash;<ion-icon name="ios-settings" style="float: right;padding: 20px;"></ion-icon>&ndash;&gt;-->
-        <!--<ion-buttons end>-->
-          <!--<button color="light" ion-button icon-only (click)="presentPopover($event)">-->
-            <!--<ion-icon name="ios-settings"></ion-icon>-->
-          <!--</button>-->
-        <!--</ion-buttons>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
-  <!--</ion-grid>-->
-
+<ion-header color="light">
   <ion-navbar>
-    <!--<button ion-button menuToggle>-->
-      <!--<ion-icon name="menu"></ion-icon>-->
-    <!--</button>-->
+
     <ion-title>
       <ion-row>
-        <ion-col width-50 right text-right><img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px"></ion-col>
+        <ion-col width-50 right text-right><img src="assets/img/appicon.svg" alt="Ionic logo" style="max-width: 55px">
+        </ion-col>
         <ion-col width-50 style="margin-top: 10px">neveshtak</ion-col>
       </ion-row>
 
@@ -50,23 +18,36 @@
     </ion-buttons>
   </ion-navbar>
 
-    <!--<ion-buttons end>-->
-      <!--<button ion-button icon-only (click)="presentFilter()">-->
-        <!--<ion-icon ios="ios-options-outline" md="md-options"></ion-icon>-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
-  <!--</ion-navbar>-->
-
-  <!--<ion-toolbar no-border-top>-->
-    <!--&lt;!&ndash;<ion-searchbar color="primary"&ndash;&gt;-->
-                   <!--&lt;!&ndash;[(ngModel)]="queryText"&ndash;&gt;-->
-                   <!--&lt;!&ndash;(ionInput)="updateSchedule()"&ndash;&gt;-->
-                   <!--&lt;!&ndash;placeholder="Search">&ndash;&gt;-->
-    <!--&lt;!&ndash;</ion-searchbar>&ndash;&gt;-->
-  <!--</ion-toolbar>-->
 </ion-header>
 
 <ion-content>
+  <ion-list *ngIf="subCat === 'show'">
+    <ion-grid>
+      <ion-row style="background-color: #ddd">
+        <ion-col>
+          <!--<ion-icon name="ios-arrow-back"></ion-icon>-->
+          <span (click)="subCategory('hide', '')" style="margin-left: 10px"> {{titleCat}}</span><span
+          *ngIf="endLevelDataStatus" (click)="subCategory('show', endLevelData.category, titleCat)"
+          style="margin-left: 10px">/ {{endLevelData.title}}</span>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </ion-list>
+
+  <ion-list *ngIf="subTag">
+    <ion-grid>
+      <ion-row style="background-color: #ddd">
+        <ion-col center text-center>
+          <!--<ion-icon name="ios-arrow-back"></ion-icon>-->
+          <span (click)="subTagBack()" style="margin-left: 10px"> {{tagSelected.title}}</span>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </ion-list>
   <ion-segment color="dark" [(ngModel)]="segment" (ionChange)="updateSchedule(segment)">
     <ion-segment-button style="color: #000" value="Timeline">
       Timeline
@@ -81,34 +62,95 @@
       Profile
     </ion-segment-button>
   </ion-segment>
-  <ion-list  *ngIf="shownSessions === 'Timeline'">
+  <ion-list *ngIf="shownSessions === 'Timeline'">
 
     <ion-toolbar>
       <!--<div padding>-->
-        <ion-segment color="dark" [(ngModel)]="pet">
-          <ion-segment-button color="dark" value="puppies">
-            Users
-          </ion-segment-button>
-          <ion-segment-button style="color: #000;" value="kittens">
-            Categories
-          </ion-segment-button>
+      <ion-segment color="dark" [(ngModel)]="pet">
+        <ion-segment-button color="dark" value="puppies" (click) = "userSet()">
+          Users
+        </ion-segment-button>
+        <ion-segment-button style="color: #000;" value="kittens" (click) = "categorySet()">
+          Categories
+        </ion-segment-button>
 
-          <ion-segment-button style="color: #000;" value="puppies1">
-            Tags
-          </ion-segment-button>
-        </ion-segment>
+        <ion-segment-button style="color: #000;" value="puppies1" (click) = "tagsSet()">
+          Tags
+        </ion-segment-button>
+      </ion-segment>
       <!--</div>-->
     </ion-toolbar>
 
     <div [ngSwitch]="pet">
       <ion-list *ngSwitchCase="'puppies1'">
-        <ion-item>
-          <ion-thumbnail item-left>
-            <img src="img/speakers/iguana.jpg">
-          </ion-thumbnail>
-          <h2>majid azad</h2>
-        </ion-item>
-        ...
+
+        <ion-grid *ngIf="!subTag">
+          <ion-item *ngFor='let tags of tagsData' (click)="getTagData(tags)">
+            <!--<ion-thumbnail item-left>-->
+            <!--<img src="assets/img/speakers/cheetah.jpg">-->
+            <!--</ion-thumbnail>-->
+            <ion-row>
+              <ion-col width-80>
+                <h2>{{tags.title}}</h2>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated {{tags.description}} by
+                  @{{tags.owner}}</h6>
+              </ion-col>
+              <ion-col width-20>
+                <ion-badge color="dark">{{tags.count}}</ion-badge>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-grid>
+
+
+        <ion-list *ngIf="subTag">
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="{{tagSelected.imageOwner}}">
+            </ion-thumbnail>
+            <!--<ion-col width-100><h3 style="padding: 0px"><b>cat1 > cat2 > cat3 > ...</b></h3></ion-col>-->
+            <ion-col width-100><h4 style="padding: 0px"><b>{{tagSelected.owner}}</b></h4></ion-col>
+            <ion-col width-100><h6 style="padding: 0px"><span style="color: #ddd">{{tagSelected.description}}</span>
+            </h6></ion-col>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col center text-center>
+                <img src="{{tagSelected.image}}" alt="Ionic logo" center>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col width-20 center text-center>
+
+                <ion-icon name="ios-heart"></ion-icon>
+                <br>110
+              </ion-col>
+              <ion-col width-20 center text-center>
+
+                <ion-icon name="ios-thumbs-up"></ion-icon>
+                <br>20
+              </ion-col>
+              <ion-col width-20 center text-center>
+
+                <ion-icon name="ios-thumbs-down"></ion-icon>
+                <br>2
+              </ion-col>
+              <ion-col width-20 center text-center>
+
+                <ion-icon name="ios-chatbubbles"></ion-icon>
+                <br>2
+              </ion-col>
+              <ion-col width-20 center text-center>
+
+                <ion-icon name="ios-paper-plane"></ion-icon>
+                <br>0
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+        </ion-list>
+
       </ion-list>
       <ion-list *ngSwitchCase="'puppies'">
         <ion-item>
@@ -122,15 +164,15 @@
         <ion-grid>
           <ion-row>
             <ion-col center text-center>
-              <img src="assets/img/speakers/iguana.jpg" alt="Ionic logo" center >
+              <img src="assets/img/speakers/iguana.jpg" alt="Ionic logo" center>
             </ion-col>
           </ion-row>
           <ion-row>
-              <ion-col width-20 center text-center >
+            <ion-col width-20 center text-center>
 
-                <ion-icon name="ios-heart"></ion-icon>
-                <br>110
-              </ion-col>
+              <ion-icon name="ios-heart"></ion-icon>
+              <br>110
+            </ion-col>
             <ion-col width-20 center text-center>
 
               <ion-icon name="ios-thumbs-up"></ion-icon>
@@ -156,16 +198,16 @@
         </ion-grid>
 
       </ion-list>
-      <ion-list *ngSwitchCase="'kittens'" >
+      <ion-list *ngSwitchCase="'kittens'">
         <ion-grid *ngIf="subCat === 'hide'">
-          <ion-item >
+          <ion-item>
             <ion-thumbnail item-left>
               <img src="assets/img/speakers/cheetah.jpg">
             </ion-thumbnail>
             <ion-row>
               <ion-col width-80 (click)="subCategory('show', 'cat1','Category 1')">
                 <h2>Category 1</h2>
-                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 3 Hours ago by apz</h6>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 3 Hours ago by @apz</h6>
               </ion-col>
               <ion-col width-20>
                 <ion-badge color="dark">24</ion-badge>
@@ -179,7 +221,7 @@
             <ion-row>
               <ion-col width-80 (click)="subCategory('show', 'cat2','Category 2')">
                 <h2>Category 2</h2>
-                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 10 Hours ago by mgs</h6>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 10 Hours ago by @mgs</h6>
               </ion-col>
               <ion-col width-20>
                 <ion-badge color="dark">56</ion-badge>
@@ -193,7 +235,7 @@
             <ion-row>
               <ion-col width-80 (click)="subCategory('show', 'cat3','Category 3')">
                 <h2>Category 3</h2>
-                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 11 Hours ago by srh</h6>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated 11 Hours ago by @srh</h6>
               </ion-col>
               <ion-col width-20>
                 <ion-badge color="dark">18</ion-badge>
@@ -207,7 +249,7 @@
             <ion-row>
               <ion-col width-80 (click)="subCategory('show', 'cat4','Category 4')">
                 <h2>Category 4</h2>
-                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated Yesterday by ama</h6>
+                <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Updated Yesterday by @ama</h6>
               </ion-col>
               <ion-col width-20>
                 <ion-badge color="dark">67</ion-badge>
@@ -215,49 +257,72 @@
             </ion-row>
           </ion-item>
         </ion-grid>
-    </ion-list>
-      <ion-list *ngIf="subCat === 'show'">
-        <ion-grid>
-          <ion-row style="background-color: #ddd">
-            <ion-col  (click)="subCategory('hide', '')">
-              <ion-icon name="ios-arrow-back"></ion-icon><span style="margin-left: 10px">{{titleCat}}</span>
-            </ion-col>
-
-          </ion-row>
-
-        </ion-grid>
-        <ion-item *ngFor='let value of selectedCat'>
+      </ion-list>
+      <ion-list *ngIf="subCat === 'show' && !endLevelDataStatus">
+        <ion-item *ngFor='let value of selectedCat' (click)="getData(value)">
           <ion-thumbnail item-left>
             <img src="{{value['image']}}">
           </ion-thumbnail>
           <ion-row>
-            <ion-col width-80 >
+            <ion-col width-80>
               <h2>{{value.title}}</h2>
-              <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">{{value['description']}}</h6>
+              <h6 style="font-size: 12px ; color:#ddd; font-weight: bold">Uploaded {{value['description']}} by
+                @{{value['owner']}}</h6>
             </ion-col>
             <ion-col width-20>
               <ion-badge color="dark">{{value['count']}}</ion-badge>
             </ion-col>
           </ion-row>
         </ion-item>
-        <!--<ion-item>-->
-            <!--<ion-thumbnail item-left>-->
-              <!--<img src="assets/img/speakers/steve.jpg">-->
-            <!--</ion-thumbnail>-->
-            <!--<h2>Steve Golabshekar</h2>-->
-        <!--</ion-item>-->
-        <!--<ion-item>-->
-          <!--<ion-thumbnail item-left>-->
-            <!--<img src="assets/img/speakers/ray.jpg">-->
-          <!--</ion-thumbnail>-->
-          <!--<h2>Ray Hossayni</h2>-->
-        <!--</ion-item>-->
-        <!--<ion-item>-->
-          <!--<ion-thumbnail item-left>-->
-            <!--<img src="assets/img/speakers/majid.jpg">-->
-          <!--</ion-thumbnail>-->
-          <!--<h2>Martin Azad</h2>-->
-        <!--</ion-item>-->
+
+
+      </ion-list>
+      <ion-list *ngIf="endLevelDataStatus">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="{{endLevelData.imageOwner}}">
+          </ion-thumbnail>
+          <!--<ion-col width-100><h3 style="padding: 0px"><b>cat1 > cat2 > cat3 > ...</b></h3></ion-col>-->
+          <ion-col width-100><h4 style="padding: 0px"><b>{{endLevelData.owner}}</b></h4></ion-col>
+          <ion-col width-100><h6 style="padding: 0px"><span style="color: #ddd">{{endLevelData.description}}</span></h6>
+          </ion-col>
+        </ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col center text-center>
+              <img src="{{endLevelData.image}}" alt="Ionic logo" center>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col width-20 center text-center>
+
+              <ion-icon name="ios-heart"></ion-icon>
+              <br>110
+            </ion-col>
+            <ion-col width-20 center text-center>
+
+              <ion-icon name="ios-thumbs-up"></ion-icon>
+              <br>20
+            </ion-col>
+            <ion-col width-20 center text-center>
+
+              <ion-icon name="ios-thumbs-down"></ion-icon>
+              <br>2
+            </ion-col>
+            <ion-col width-20 center text-center>
+
+              <ion-icon name="ios-chatbubbles"></ion-icon>
+              <br>2
+            </ion-col>
+            <ion-col width-20 center text-center>
+
+              <ion-icon name="ios-paper-plane"></ion-icon>
+              <br>0
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
       </ion-list>
 
     </div>
